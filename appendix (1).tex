@@ -1,0 +1,722 @@
+\documentclass[USletter,12pt, titlepage]{article} %alter\textbf{natively use: \setpapersize{USletter a4paper}%
+%\usepackage{amsbsy,amssymb,setspace,graphicx}
+\usepackage{vmargin} %\usepackage{showkeys} to show the references names%
+\usepackage{setspace, amsmath, rotating, multirow, graphicx, hyperref, appendix, mathptmx, threeparttable, caption}
+\usepackage[utf8]{inputenc}
+\pagestyle{plain}
+\setmarginsrb{1.0in}{1.0in}{1.0in}{1.0in}{0pt}{0pt}{0pt}{0.4in}
+
+\usepackage[english]{babel}
+\usepackage[authoryear]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+%\usepackage[colorlinks=true,linkcolor=blue, allcolors=blue]{hyperref}
+
+%Hyperlink references, URLs
+%\urlstyle{same} %Makes URLs the same font style (roman, sans serif, etc)
+%\renewcommand{\cite}[2][]{\citealt*[#1]{#2}} %redef \cite to use \cite
+%\newcommand{\citep}[2][]{\footnote{\cite[#1]{#2}.}} %Footnote citation
+\usepackage[toc,page,header]{appendix}
+\usepackage{minitoc}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{threeparttable}
+\usepackage{adjustbox}
+
+\usepackage{float}
+\usepackage[flushleft]{threeparttable}
+\usepackage[table,xcdraw]{xcolor}
+\hypersetup{colorlinks,breaklinks,
+citecolor=[RGB]{0, 0, 128},
+filecolor=[RGB]{0, 0, 128},
+urlcolor=[RGB]{0, 0, 128},
+linkcolor=[RGB]{0, 0, 128}}
+\bibliographystyle{apsr}
+\graphicspath{{Figures/}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+
+
+
+
+
+
+\title{Online Appendix: ``Institutional Crowding in the International Election Monitoring Regime"}
+
+
+\renewcommand \thepart{}
+\renewcommand \partname{}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+%\doparttoc % Tell to minitoc to generate a toc for the parts
+\newpage
+\appendix
+%\addcontentsline{toc}{section}{Appendix} % Add the appendix text to the document TOC
+%\part{Appendix} % Start the appendix part
+%\parttoc % Insert the appendix TOC
+
+\newpage
+
+The appendix documents the construction and validation of a novel, election-level dataset on international election observation missions (EOMs) as reported in global media coverage. It details a systematic data collection process in which research assistants used standardized Boolean searches across multiple ProQuest news databases, applying consistent time windows, inclusion rules, and de-duplication procedures to identify relevant articles around each election. The appendix explains how variables were coded, including measures of article volume, tone (positive and negative language attributed to observers), identification of observer organizations, and overall assessments of election quality and inter-observer agreement. It also describes the aggregation of these data across four distinct media source types to enable cross-source comparisons. Additional sections list the countries included in the sample and present a series of robustness checks—such as excluding regions, distinguishing between Western and non-Western observers, adding lagged dependent variables, incorporating media freedom controls, and testing scope conditions across regime types—demonstrating the stability of the main findings under alternative specifications.
+
+\section{Construction of Original Data}
+\subsection{Article search procedures}
+
+This section documents the exact databases, search terms, filters, and inclusion criteria used by Research Assistants (RAs) to identify the news articles that form the basis of the dataset. We began by identifying the set of elections known to have hosted international observers, using the comprehensive record constructed by \citet{RoussiasRufino2018}. Election date and election type (presidential, legislative) were identified using NELDA \citep{HydeMarinov2012}. The present data cover executive elections (presidential contests in presidential systems and legislative contests in parliamentary systems). In elections with more than one round, data collection pertains to the first round. 
+
+\subsection{General Inclusion and Archiving Rules}
+
+RAs were instructed to apply the following rules consistently across all searches:
+
+\begin{itemize}
+    \item \textbf{Date window:} For each election, searches were limited to a window beginning one month prior to the election date and ending one month after the election date. The election date was provided to the RAs based on the NELDA dataset (format: mm/dd/yyyy). For elections with multiple rounds, RAs performed their search based on the date of the election first round. 
+    \item \textbf{Relevance screening:} An article was coded as \emph{relevant} if it included substantive information about the election in question. Articles that mentioned the country but contained no information about the election were classified as \emph{not relevant} and excluded from the count of relevant articles. The average number of relevant newspaper articles retrieved per election was 18, while the median number was four.
+    \item \textbf{Removal of duplicates:} Duplicate articles appearing across multiple news sources were removed using the ProQuest option to exclude duplicates. 
+    \item \textbf{Archiving requirement:} Any article used to inform responses in the Qualtrics coding instrument was saved and archived in a folder labeled with the country name and election year.
+    
+\end{itemize}
+
+\subsection{Search Keywords}
+
+All searches used the same core Boolean search string. RAs replaced \texttt{COUNTRY*} with an appropriately truncated country name to capture both the country name and its adjectival form.
+
+For example:
+\begin{itemize}
+    \item \texttt{Uganda*} captures ``Uganda'' and ``Ugandan''
+    \item \texttt{Thai*} captures ``Thai'' and ``Thailand''
+    \item \texttt{Albania*} captures ``Albania'' and ``Albanian''
+\end{itemize}
+
+RAs selected the truncation that best returned both the country name and its adjective.
+
+The full search string entered into the ProQuest Advanced Search box was:
+
+\begin{quote}
+\texttt{ft(COUNTRY* AND (election OR electoral)) AND ft("election monitors" OR "election monitoring" OR "election observers" OR "election observation" OR "international monitors" OR "international monitoring" OR "international observers" OR "international observation")}
+\end{quote}
+
+The operator \texttt{ft()} restricts results to full-text occurrences of the search terms.
+
+\subsection{Database Searches}
+
+Four separate searches were conducted for each election, using two ProQuest databases and distinct source-type filters.
+
+\subsubsection{Search 1: International Newsstream -- Newspapers} \textbf{(International Newspapers)}
+
+\begin{itemize}
+    \item Database: \textit{International Newsstream}
+    \item Interface: Advanced Search
+    \item Search string: As specified above
+    \item Filter: ``Full text only''
+    \item Date range: One month before to one month after the election
+    \item Source Type: ``Newspapers'' (Wire Feeds unchecked)
+\end{itemize}
+
+RAs recorded the total number of relevant articles returned after screening.
+
+\subsubsection{Search 2: International Newsstream -- Wire Feeds -- BBC Monitoring} \textbf{(Domestic News Sources)}
+
+\begin{itemize}
+    \item Database: \textit{International Newsstream}
+    \item Interface: Advanced Search
+    \item Search string: As specified above
+    \item Filter: ``Full text only''
+    \item Date range: One month before to one month after the election
+    \item Source Type: ``Wire Feeds'' (Newspapers unchecked)
+\end{itemize}
+
+After obtaining search results, RAs used the ``Publications'' filter panel to select \emph{only} \textit{BBC Monitoring}. 
+
+\subsubsection{Search 3: International Newsstream -- Wire Feeds -- All Except BBC Monitoring} \textbf{(International Newswires)}
+
+\begin{itemize}
+    \item Database: \textit{International Newsstream}
+    \item Interface: Advanced Search
+    \item Search string: As specified above
+    \item Filter: ``Full text only''
+    \item Date range: One month before to one month after the election
+    \item Source Type: ``Wire Feeds'' (Newspapers unchecked)
+\end{itemize}
+
+After obtaining search results, RAs used the ``Publications'' filter panel to select \emph{all wire feed publications except} \textit{BBC Monitoring}.
+
+\subsubsection{Search 4: U.S. Newsstream -- Newspapers} \textbf{(U.S. Newspapers)}
+
+\begin{itemize}
+    \item Database: \textit{U.S. Newsstream}
+    \item Interface: Advanced Search
+    \item Search string: As specified above
+    \item Filter: ``Full text only''
+    \item Date range: One month before to one month after the election
+    \item Source Type: ``Newspapers'' (Wire Feeds unchecked)
+\end{itemize}
+
+\subsection{Rationale for Search Design}
+
+The use of four separate searches allows systematic comparison across:
+
+\begin{itemize}
+    \item International newspapers,
+    \item BBC Monitoring wire reports (domestic news sources),
+    \item Other international wire services (not based in the country holding the election), and
+    \item U.S. newspapers.
+\end{itemize}
+
+Using identical keywords and time windows across databases ensures comparability across source types, while separating BBC Monitoring from other wire services permits analysis of potential differences in reporting between domestic news sources (from the country in question) and international news sources (publications based outside the country in question).
+
+\subsection{Variable coding: Overview}
+
+As described below, some variables are coded based on all relevant articles. Others are coded based only on articles in their source category (international newspapers, domestic/BBC Monitoring, international newswires, U.S. newspapers). 
+
+This dataset was constructed to systematically capture how international election observation missions (EOMs) were reported in news coverage of national elections. The unit of analysis is the election (country--year--month). For each election, trained Research Assistants (RAs) conducted structured searches of major news databases and completed a standardized Qualtrics survey instrument.
+
+The survey recorded (1) the presence and identity of international observer groups,  (2) how these groups’ evaluations of the elections were characterized , (3) the level of agreement or disagreement among observers, and (4) variation in reporting across different types of news sources.
+
+\subsection{Election Identification and Administrative Variables}
+
+For each entry, the following identifying information was recorded:
+
+\begin{itemize}
+    \item Country name
+    \item Country code
+    \item Election year
+    \item Election month
+    \item Election type (check all that apply; e.g., presidential, parliamentary, other)
+    \item Open-ended elaboration on election type, if necessary
+\end{itemize}
+
+Additional administrative metadata (e.g., RA name, response ID, start/end dates) were collected for internal tracking and quality control.
+
+\subsection{News Source Categories}
+
+As explained above, RAs searched four distinct categories of news sources:
+
+\begin{enumerate}
+    \item \textit{International Newsstream -- Newspapers} (non-U.S. international newspapers)
+    \item \textit{International Newsstream -- Wire Feeds -- BBC Monitoring} (domestic news reports from the country holding the election)
+    \item \textit{International Newsstream -- Wire Feeds -- All Except BBC Monitoring} (news reports from countries other than the one holding the election)
+    \item \textit{U.S. Newsstream -- Newspapers}
+\end{enumerate}
+
+For each category, identical sets of variables were coded. Subsequently, some variables are based on all news reports, regardless of source. 
+
+\subsection{Article Counts}
+
+For each source category, RAs recorded:
+
+\begin{itemize}
+    \item Number of relevant article hits returned (excluding irrelevant articles that did not mention the election).
+\end{itemize}
+
+This provides a measure of the volume of coverage of election observers within each source type.
+
+\subsection{Positive and Negative Words Attributed to International Observers}
+
+For each source category, RAs coded the appearance of positive and negative words/phrases attributed to the judgments of international observers about the election.
+
+\subsubsection{Positive Words/Phrases Attributed to International Observers}
+
+RAs selected all positive characterizations attributed to international observers that appeared in at least one article. The pre-specified list of positive phrases that RAs recorded are as follows:  \textit{clean, transparent, orderly, organized, free,
+peaceful, met international standards, progress, improve*}. An open-text field allowed entry of additional positive phrases not listed in the predefined checklist.
+
+\subsubsection{Negative Words/Phrases Attributed to International Observers}
+
+RAs selected all negative characterizations attributed to international observers that appeared in at least one article. The pre-specified list of negative phrases that RAs recorded are as follows: \textit{reflect, critic*, irregular, flaw, problem, manipulat*, fraud, step back, violen*}. An open-text field allowed entry of additional negative phrases not listed in the predefined checklist.
+
+
+\subsection{Observer Group Identification}
+
+For each source category, RAs indicated:
+
+\begin{itemize}
+    \item Which international election observer groups were mentioned by name (check all that apply from a predefined list of organizations). The predefined list is as follows: African American Institute (AAI), Agence de la Francophonie / International Organisation of La Francophonie (AF / OIF), League of Arab States (AL), Asian Network for Free Elections (ANFREL), Association of Southeast Asian Nations (ASEAN), African Union (AU), Organization of African Unity (OAU), Caribbean Community (CARICOM), The Carter Center (CC), Council of Europe (COE), Common Market for Eastern and Southern Africa (COMESA), Commonwealth of Nations (Commonwealth), Community of Portuguese Language Countries (CPLP), East African Community (EAC), Economic Community of Central African States (ECCAS), Economic Community of West African States (ECOWAS), Electoral Institute for Sustainable Democracy in Africa (EISA), European Network of Election Monitoring Organizations (ENEMO), European Parliament (EP), European Union (EU), International Foundation for Electoral Systems (IFES), Intergovernmental Authority on Development (IGAD), Inter-American Institute of Human Rights (IIHR), Commonwealth of Independent States (CIS), International Republican Institute (IRI), Commonwealth Observer Group (MOG), National Democratic Institute (NDI), Organization of American States (OAS), Office for Democratic Institutions and Human Rights of the Organization for Security and Co-operation in Europe (OSCE/ODIHR), OSCE Parliamentary Assembly (OSCE PA), Pacific Islands Forum (PIF), Southern African Development Community (SADC), Shanghai Cooperation Organisation (SCO), United Nations (UN), Unión Interamericana de Organismos Electorales (UNIORE), Westminster Foundation for Democracy (WFD).
+    \item Other countries represented (parliamentarians, officials, or embassies not part of listed organizations).
+    \item Other observer groups not included in the predefined list (open-text).
+\end{itemize}
+
+This produces binary indicators for the presence (in news coverage) of specific observer organizations in each source type. 
+
+In many articles international observers are discussed but are not identified by name.
+
+\subsection{Overall Judgment and Inter-Observer Consensus}
+
+For each source category, RAs coded:
+
+\subsubsection{Overall Assessment}
+
+A categorical assessment of the reported overall judgment expressed by international observers in the news coverage. The primary categories make up a three-part classification of whehter observers' assessment was \textit{approval}, \textit{mixed}, or \textit{disapproval.} Other categories were coded if information was unavailable or unclear. The assessments were coded as follows: 
+\begin{itemize}
+    \item \textit{approve} - election was deemed to be clean or legitimate, with no negative aspects noted.
+    \item \textit{mixed} - both positive and negative aspects of the election were noted.
+    \item \textit{disapprove} - election was deemed to be irregular, manipulated or illegitimate, with no positive aspects noted. 
+    \item \textit{unclear} - judgment was too unclear to assign to one of the three categories above. 
+    \item \textit{no information}
+    \end{itemize}
+
+
+\subsection{Aggregate Measures of Observer Presence}
+
+Across all sources combined, RAs recorded:
+
+\begin{itemize}
+    \item Maximum estimated number of international observer groups present (number of distinct missions/groups, not individuals). Groups do not all have to be identified by name. If an article states that the election hosted 5 international EOMs, this variable is coded as 5 even if the groups are not all mentioned by name.
+\end{itemize}
+
+\subsection{Observer Assessment by Organization}
+
+For each international EOM listed by name in one or more articles, the survey included:
+
+\begin{enumerate}
+    \item A categorical characterization of the group’s overall assessment as either: 
+    \begin{itemize}
+    \item \textit{approve} - election was deemed to be clean or legitimate, with no negative aspects noted.
+    \item \textit{mixed} - both positive and negative aspects of the election were noted.
+    \item \textit{disapprove} - election was deemed to be irregular, manipulated or illegitimate, with no positive aspects noted. 
+    \item \textit{unclear} - judgment was too unclear to assign to one of the three categories above. 
+    \item \textit{no information}
+    \end{itemize}
+    
+    \item A direct quotation from news coverage validating the coding.
+\end{enumerate}
+
+Open-text fields allowed coding of additional countries or organizations not included in the predefined list.
+
+
+\subsection{Summary}
+
+The dataset contains election-level identifiers, source-specific coverage measures, observer-specific verdict variables, cross-source comparison measures, indicators of political contestation, aggregate measures of observer presence, and qualitative validation fields with direct quotations. Together, these variables provide a systematic, media-based dataset on the public reporting and framing of international election observation missions.
+
+\newpage
+\section{Countries Included in the Sample}
+\begin{center}
+\begin{longtable}{lc|lc}
+\toprule
+\textbf{Country} & \textbf{Freq.} & \textbf{Country} & \textbf{Freq.} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Country} & \textbf{Freq.} & \textbf{Country} & \textbf{Freq.} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+Afghanistan & 3 & Kyrgyzstan & 4 \\
+Albania & 9 & Lebanon & 4 \\
+Algeria & 7 & Lesotho & 5 \\
+Argentina & 8 & Liberia & 3 \\
+Armenia & 4 & Madagascar & 6 \\
+Azerbaijan & 7 & Malawi & 7 \\
+Bangladesh & 8 & Malaysia & 6 \\
+Barbados & 5 & Maldives & 3 \\
+Belarus & 4 & Mali & 6 \\
+Benin & 6 & Mauritania & 5 \\
+Bolivia & 10 & Mauritius & 7 \\
+Bosnia and Herzegovina & 1 & Mexico & 5 \\
+Botswana & 6 & Moldova & 7 \\
+Brazil & 8 & Mongolia & 8 \\
+Burkina Faso & 5 & Mozambique & 5 \\
+Burma/Myanmar & 4 & Namibia & 5 \\
+Burundi & 3 & Nepal & 3 \\
+Cambodia & 5 & Nicaragua & 5 \\
+Cameroon & 5 & Niger & 7 \\
+Cape Verde & 6 & Nigeria & 7 \\
+Central African Republic & 7 & North Macedonia & 5 \\
+Chad & 3 & Pakistan & 7 \\
+Chile & 7 & Panama & 6 \\
+Colombia & 7 & Papua New Guinea & 6 \\
+Comoros & 6 & Paraguay & 8 \\
+Costa Rica & 8 & Peru & 6 \\
+Croatia & 5 & Philippines & 4 \\
+Dem. Rep. of the Congo & 3 & Republic of the Congo & 4 \\
+Djibouti & 1 & Rwanda & 3 \\
+Dominican Republic & 8 & Sao Tome and Principe & 3 \\
+Ecuador & 4 & Senegal & 5 \\
+Egypt & 11 & Seychelles & 5 \\
+El Salvador & 7 & Sierra Leone & 4 \\
+Equatorial Guinea & 5 & Singapore & 1 \\
+Ethiopia & 4 & Slovenia & 2 \\
+Fiji & 7 & Solomon Islands & 7 \\
+Gabon & 6 & South Africa & 6 \\
+Georgia & 6 & South Korea & 1 \\
+Ghana & 7 & Sri Lanka & 5 \\
+Guatemala & 7 & Sudan & 2 \\
+Guinea & 4 & Suriname & 6 \\
+Guinea-Bissau & 6 & Syria & 5 \\
+Guyana & 6 & Tajikistan & 5 \\
+Haiti & 8 & Tanzania & 5 \\
+Honduras & 7 & Thailand & 9 \\
+India & 8 & The Gambia & 6 \\
+Indonesia & 7 & Timor-Leste & 2 \\
+Iran & 8 & Togo & 5 \\
+Iraq & 4 & Trinidad and Tobago & 5 \\
+Ivory Coast & 6 & Tunisia & 7 \\
+Jamaica & 7 & Turkey & 8 \\
+Kazakhstan & 6 & Turkmenistan & 1 \\
+Kenya & 7 & Uganda & 4 \\
+Kosovo & 3 & Ukraine & 3 \\
+Kyrgyzstan & 4 & Uruguay & 5 \\
+Lebanon & 4 & Uzbekistan & 2 \\
+Lesotho & 5 & Vanuatu & 8 \\
+Liberia & 3 & Yemen & 3 \\
+Madagascar & 6 & Zambia & 8 \\
+Malawi & 7 & Zimbabwe & 6 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & & \textbf{621} \\
+\end{longtable}
+\end{center}
+
+\newpage
+\section{Robustness check -- Eliminating Regions}
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\begin{tabular}{lccccc}
+\toprule
+ & \textbf{Excl. Post-Sov.} & \textbf{Excl. Africa} & \textbf{Excl. Asia} & \textbf{Excl. LatAm} & \textbf{Excl. Postcomm.} \\
+ & b/se & b/se & b/se & b/se & b/se \\
+\midrule
+Previous Election Protests & 0.302 & 0.621 & 0.688** & 0.464$^{+}$ & 0.511$^{+}$ \\
+ & (0.318) & (0.593) & (0.320) & (0.280) & (0.282) \\
+Previous Opp. Gain & 0.290 & 0.991** & 0.267 & 0.098 & 0.218 \\
+ & (0.273) & (0.491) & (0.280) & (0.253) & (0.245) \\
+GDP Growth & $-$0.012 & $-$0.031 & 0.029 & 0.015 & 0.013 \\
+ & (0.029) & (0.050) & (0.024) & (0.024) & (0.025) \\
+Autocracy ($t-1$) & 0.490 & 1.903$^{+}$ & 0.091 & 0.458 & 0.360 \\
+ & (0.433) & (0.971) & (0.427) & (0.419) & (0.416) \\
+ODA log ($t-1$) & 0.254$^{+}$ & 0.011 & 0.203 & 0.193 & 0.147 \\
+ & (0.138) & (0.200) & (0.126) & (0.122) & (0.120) \\
+GDP per capita log ($t-1$) & $-$0.676*** & $-$0.354 & $-$0.631*** & $-$0.460** & $-$0.554*** \\
+ & (0.159) & (0.315) & (0.147) & (0.147) & (0.142) \\
+Previous Elec. Quality & $-$0.181 & 0.019 & $-$0.808 & $-$0.084 & $-$0.776 \\
+ & (0.841) & (1.331) & (0.868) & (0.862) & (0.824) \\
+Time & 0.119*** & 0.106*** & 0.121*** & 0.127*** & 0.126*** \\
+ & (0.014) & (0.024) & (0.015) & (0.015) & (0.013) \\
+Constant & $-$4.409 & $-$3.890 & $-$3.219 & $-$4.763 & $-$2.957 \\
+ & (3.339) & (5.711) & (3.130) & (3.038) & (2.993) \\
+\midrule
+$N$ & 578 & 353 & 515 & 473 & 603 \\
+Pseudo $R^{2}$ & 0.240 & 0.233 & 0.243 & 0.204 & 0.229 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Clustered standard errors in parentheses. $^{+}$ $p<0.10$, * $p<0.05$, ** $p<0.01$, *** $p<0.001$
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\vspace{0.5em}
+\caption{This table replicates Table 1, Model 1, eliminating one region in each model.}
+\end{table}
+\newpage
+
+\section{Robustness Check -- Western and Non-Western Organizations as a Proxy for EOM Quality}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c|c|c}
+\hline
+                  &      Western   &     Non-Western   &     Both   \\
+\hline
+Previous Election Protests&      -0.620** &      -0.219   &       0.715** \\
+                    &     (0.291)   &     (0.467)   &     (0.301)   \\
+GDP Growth          &       0.025   &       0.008   &       0.012   \\
+                    &     (0.027)   &     (0.020)   &     (0.019)   \\
+Previous Opp. Gain&      -0.303   &      -0.517   &       0.747** \\
+                    &     (0.245)   &     (0.374)   &     (0.254)   \\
+Autocracy (t-1)&       0.324   &       0.986   &       0.183   \\
+                    &     (0.397)   &     (0.660)   &     (0.456)   \\
+ODA log (t-1)        &       0.327** &      -0.192   &       0.264** \\
+                    &     (0.116)   &     (0.142)   &     (0.117)   \\
+GDP percap log (t-1) &      -0.313   &       0.015   &      -0.286   \\
+                    &     (0.257)   &     (0.216)   &     (0.178)   \\
+Previous Elec. Quality&      -0.200   &       1.371   &      -0.664   \\
+                    &     (0.802)   &     (1.221)   &     (0.871)   \\
+
+Time                &       0.027+  &       0.118***&       0.113***\\
+                    &     (0.016)   &     (0.024)   &     (0.014)   \\
+Constant            &      -6.142+  &      -3.183   &      -8.577** \\
+                    &     (3.519)   &     (3.390)   &     (3.094)   \\
+                    \hline
+N                   &         621   &         394   &         597   \\
+PseudoR2            &       0.189   &       0.197   &       0.312   \\
+\hline
++ p$<$0.10, ** p$<$0.05,  * p$<$0.01, *** p$<$0.001
+\end{tabular}
+\vspace{0.5em}
+\caption{This table predicts the presence of one or more (i) Western-based EOMs, (ii) non-Western based EOMs, (iii) both Western and non-Western EOMs simultaneously present. The covariates in the models are the same as in Table 1.}
+\end{table}
+
+
+\newpage
+
+\section{Robustness Check --- Adding Lagged Dependent Variables}
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\begin{tabular}{lcccc}
+\toprule
+ & \textbf{Mixed EOM Quality} & \textbf{Any EOM} & \textbf{Many EOMs} & \textbf{EOM Count} \\
+ & b/se & b/se & b/se & b/se \\
+\midrule
+\multicolumn{5}{l}{\textit{Main equation}} \\
+\midrule
+
+Previous Election Protests & 0.636* & 0.210 & 0.668** & 0.217* \\
+ & (0.254) & (0.256) & (0.257) & (0.087) \\
+GDP Growth & 0.004 & 0.030 & 0.029 & $-$0.000 \\
+ & (0.020) & (0.022) & (0.018) & (0.009) \\
+Previous Election Opposition Gain & 0.653** & 0.410$^{+}$ & 0.379$^{+}$ & 0.170* \\
+ & (0.237) & (0.230) & (0.211) & (0.082) \\
+Autocracy (VDem), $t-1$ & 0.270 & 0.799** & 0.636$^{+}$ & 0.009 \\
+ & (0.404) & (0.295) & (0.357) & (0.124) \\
+ODA log, $t-1$ & 0.408*** & 0.467*** & 0.562*** & 0.255*** \\
+ & (0.121) & (0.098) & (0.101) & (0.046) \\
+GDP per capita log, $t-1$ & $-$0.080 & $-$0.087 & 0.085 & $-$0.044 \\
+ & (0.136) & (0.163) & (0.155) & (0.060) \\
+Previous Election Quality & $-$0.060 & 0.340 & 0.407 & $-$0.157 \\
+ & (0.733) & (0.632) & (0.716) & (0.321) \\
+\midrule
+\multicolumn{5}{l}{\textit{Region fixed effects (ref: region 1)}} \\
+
+\midrule
+\multicolumn{5}{l}{\textit{Lagged dependent variable}} \\
+\midrule
+Mixed EOM Quality lag & 1.055** & & & \\
+ & (0.387) & & & \\
+Any EOM lag & & 1.919*** & & \\
+ & & (0.284) & & \\
+Many EOMs lag & & & 1.666*** & \\
+ & & & (0.277) & \\
+EOM count lag & & & & 0.073*** \\
+ & & & & (0.014) \\
+\midrule
+Constant & $-$10.456*** & $-$10.997*** & $-$14.565*** & $-$4.192*** \\
+ & (3.018) & (2.725) & (2.635) & (1.179) \\
+\midrule
+\multicolumn{5}{l}{\textit{Inflate equation (count model only)}} \\
+\midrule
+Liberal democracy (lagged) & & & & 1.158 \\
+ & & & & (0.763) \\
+Previous Election Quality & & & & 0.557 \\
+ & & & & (0.938) \\
+Region 1 & & & & 1.587*** \\
+ & & & & (0.423) \\
+Region 5 & & & & 1.868*** \\
+ & & & & (0.326) \\
+Constant & & & & $-$1.567*** \\
+ & & & & (0.470) \\
+\midrule
+\multicolumn{5}{l}{\textit{Dispersion}} \\
+\midrule
+ln($\alpha$) & & & & $-$3.115** \\
+ & & & & (1.146) \\
+\midrule
+$N$ & 597 & 621 & 621 & 546 \\
+Pseudo $R^{2}$ & 0.221 & 0.249 & 0.244 & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Clustered standard errors in parentheses. $^{+}$ $p<0.10$, * $p<0.05$, ** $p<0.01$, *** $p<0.001$
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\vspace{0.5em}
+\caption{This table replicates Table 1, adding a lagged DV in each model.}
+\end{table}
+
+
+\section{Robustness Check --- Additional Controls for Media Freedom}
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\begin{tabular}{lcccc}
+\toprule
+ & \textbf{Mixed EOM Quality} & \textbf{Any EOM} & \textbf{Many EOMs} & \textbf{EOM Count} \\
+ & b/se & b/se & b/se & b/se \\
+\midrule
+\multicolumn{5}{l}{\textit{Main equation}} \\
+\midrule
+Previous Election Protests & 0.551$^{+}$ & $-$0.073 & 0.464 & 0.189$^{+}$ \\
+ & (0.282) & (0.271) & (0.289) & (0.098) \\
+GDP Growth & 0.006 & 0.030 & 0.034$^{+}$ & 0.009 \\
+ & (0.022) & (0.021) & (0.018) & (0.009) \\
+Previous Election Opposition Gain & 0.566* & 0.270 & 0.283 & 0.186* \\
+ & (0.262) & (0.238) & (0.236) & (0.091) \\
+Autocracy (VDem), $t-1$ & 0.460 & 1.170*** & 1.036** & 0.206 \\
+ & (0.489) & (0.328) & (0.377) & (0.138) \\
+ODA log, $t-1$ & 0.220$^{+}$ & 0.394*** & 0.477*** & 0.225*** \\
+ & (0.126) & (0.113) & (0.105) & (0.048) \\
+GDP per capita log, $t-1$ & $-$0.285$^{+}$ & $-$0.313 & $-$0.135 & $-$0.090 \\
+ & (0.168) & (0.199) & (0.184) & (0.076) \\
+Previous Election Quality & $-$0.612 & $-$0.316 & $-$0.300 & $-$0.221 \\
+ & (0.866) & (0.776) & (0.797) & (0.364) \\
+Government Censorship Effort & $-$0.032 & $-$0.298 & 0.002 & $-$0.020 \\
+ & (0.200) & (0.209) & (0.185) & (0.079) \\
+Print/Broadcast Media Perspectives & 0.291 & 0.539* & 0.405* & 0.134$^{+}$ \\
+ & (0.213) & (0.224) & (0.200) & (0.075) \\
+Region indicators & Yes & Yes & Yes & Yes \\
+Time & 0.116*** & 0.120*** & 0.115*** & 0.051*** \\
+ & (0.015) & (0.015) & (0.014) & (0.007) \\
+Constant & $-$7.697* & $-$9.905** & $-$13.535*** & $-$4.685*** \\
+ & (3.261) & (3.111) & (2.950) & (1.296) \\
+\midrule
+\multicolumn{5}{l}{\textit{Inflate equation (count model only)}} \\
+\midrule
+Liberal democracy (lagged) & & & & 1.435 \\
+ & & & & (0.988) \\
+Previous Election Quality & & & & 1.426 \\
+ & & & & (1.744) \\
+Region indicators & & & & Yes \\
+Constant & & & & $-$2.960** \\
+ & & & & (0.947) \\
+\midrule
+\multicolumn{5}{l}{\textit{Dispersion}} \\
+\midrule
+ln($\alpha$) & & & & $-$2.081*** \\
+ & & & & (0.519) \\
+\midrule
+$N$ & 597 & 621 & 621 & 546 \\
+Pseudo $R^{2}$ & 0.299 & 0.308 & 0.309 & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Clustered standard errors in parentheses. $^{+}$ $p<0.10$, * $p<0.05$, ** $p<0.01$, *** $p<0.001$
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\vspace{0.5em}
+\caption{This table replicates Table 1, addition controls for government censorship (VDem variable ``v2mecenefm") and diversity of media perspectives (VDem variable ``v2merange".}
+\end{table}
+
+\section{Scope Conditions --- Predicting EOM Crowding in Competitive and Non-Competitive Electoral Regimes}
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\begin{tabular}{lcc}
+\toprule
+ & \textbf{Competitive Regimes} & \textbf{Non-Competitive Regimes} \\
+ & b/se & b/se \\
+\midrule
+\multicolumn{3}{l}{\textit{Mixed Quality}} \\
+\midrule
+Previous Election Protests & 0.778* & 0.199 \\
+ & (0.374) & (0.414) \\
+GDP Growth & 0.017 & 0.023 \\
+ & (0.037) & (0.025) \\
+Previous Election Opposition Gain & 0.858* & 0.630 \\
+ & (0.348) & (0.442) \\
+Autocracy (VDem), $t-1$ & 0.597 & 0.678 \\
+ & (0.573) & (0.693) \\
+ODA log, $t-1$ & 0.299 & $-$0.043 \\
+ & (0.217) & (0.141) \\
+GDP per capita log, $t-1$ & $-$0.203 & $-$0.735** \\
+ & (0.279) & (0.254) \\
+Previous Election Quality & $-$1.335 & 0.480 \\
+ & (1.086) & (1.317) \\
+Government Censorship Effort & $-$0.055 & $-$0.068 \\
+ & (0.265) & (0.281) \\
+Print/Broadcast Media Perspectives & 0.142 & 0.263 \\
+ & (0.311) & (0.262) \\
+Region indicators & Yes & Yes \\
+Time & 0.158*** & 0.123*** \\
+ & (0.025) & (0.023) \\
+Constant & $-$10.434$^{+}$ & $-$0.080 \\
+ & (5.326) & (3.995) \\
+\midrule
+$N$ & 362 & 265 \\
+Pseudo $R^{2}$ & 0.366 & 0.269 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Clustered standard errors in parentheses. $^{+}$ $p<0.10$, * $p<0.05$, ** $p<0.01$, *** $p<0.001$
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\vspace{0.5em}
+\caption{This table replicates Table 1, Model 1 in the sub-sample of (i) competitive regimes, defined as those where the ruling party holds less than 75\% of seats in the legislature (World Bank DPI variable ``liec"=7), and (ii) uncompetitive regimes, defined as those where the ruling party holds more than 75\% of seats in the legislature (World Bank DPI variable ``liec"=6). The dependent variable is the indicator for ``Mixed EOM Quality," that is, when missions of varying quality are simultaneously present.}
+\end{table}
+
+\section{Robustness Check --- Media Depictions of EOM Judgments, Sub-Sample of Elections Won by the Incumbent}
+
+\begin{table}[H]
+\centering
+\begin{adjustbox}{max width=\textwidth}
+\begin{threeparttable}
+\begin{tabular}{lcccc}
+\toprule
+ & \textbf{Mixed EOM Quality} & \textbf{Any EOM} & \textbf{Many EOMs} & \textbf{EOM Count} \\
+ & b/se & b/se & b/se & b/se \\
+\midrule
+\multicolumn{5}{l}{\textit{Main equation}} \\
+\midrule
+Previous Election Protests & 0.551$^{+}$ & $-$0.073 & 0.464 & 0.189$^{+}$ \\
+ & (0.282) & (0.271) & (0.289) & (0.098) \\
+GDP Growth & 0.006 & 0.030 & 0.034$^{+}$ & 0.009 \\
+ & (0.022) & (0.021) & (0.018) & (0.009) \\
+Previous Election Opposition Gain & 0.566* & 0.270 & 0.283 & 0.186* \\
+ & (0.262) & (0.238) & (0.236) & (0.091) \\
+Autocracy (VDem), $t-1$ & 0.460 & 1.170*** & 1.036** & 0.206 \\
+ & (0.489) & (0.328) & (0.377) & (0.138) \\
+ODA log, $t-1$ & 0.220$^{+}$ & 0.394*** & 0.477*** & 0.225*** \\
+ & (0.126) & (0.113) & (0.105) & (0.048) \\
+GDP per capita log, $t-1$ & $-$0.285$^{+}$ & $-$0.313 & $-$0.135 & $-$0.090 \\
+ & (0.168) & (0.199) & (0.184) & (0.076) \\
+Previous Election Quality & $-$0.612 & $-$0.316 & $-$0.300 & $-$0.221 \\
+ & (0.866) & (0.776) & (0.797) & (0.364) \\
+Government Censorship Effort & $-$0.032 & $-$0.298 & 0.002 & $-$0.020 \\
+ & (0.200) & (0.209) & (0.185) & (0.079) \\
+Print/Broadcast Media Perspectives & 0.291 & 0.539* & 0.405* & 0.134$^{+}$ \\
+ & (0.213) & (0.224) & (0.200) & (0.075) \\
+Region indicators & Yes & Yes & Yes & Yes \\
+Time & 0.116*** & 0.120*** & 0.115*** & 0.051*** \\
+ & (0.015) & (0.015) & (0.014) & (0.007) \\
+Constant & $-$7.697* & $-$9.905** & $-$13.535*** & $-$4.685*** \\
+ & (3.261) & (3.111) & (2.950) & (1.296) \\
+\midrule
+\multicolumn{5}{l}{\textit{Inflate equation (count model only)}} \\
+\midrule
+Liberal democracy (lagged) & & & & 1.435 \\
+ & & & & (0.988) \\
+Previous Election Quality & & & & 1.426 \\
+ & & & & (1.744) \\
+Region indicators & & & & Yes \\
+Constant & & & & $-$2.960** \\
+ & & & & (0.947) \\
+\midrule
+\multicolumn{5}{l}{\textit{Dispersion}} \\
+\midrule
+ln($\alpha$) & & & & $-$2.081*** \\
+ & & & & (0.519) \\
+\midrule
+$N$ & 597 & 621 & 621 & 546 \\
+Pseudo $R^{2}$ & 0.299 & 0.308 & 0.309 & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Clustered standard errors in parentheses. $^{+}$ $p<0.10$, * $p<0.05$, ** $p<0.01$, *** $p<0.001$
+\end{tablenotes}
+\end{threeparttable}
+\end{adjustbox}
+\vspace{0.5em}
+\caption{This table replicates Table 2 on the sub-sample of elections won by the incumbent.}
+\end{table}
+
+
+
+\end{document}
