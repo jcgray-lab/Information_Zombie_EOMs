@@ -28,7 +28,7 @@ set more off
 capture mkdir output 
 
 
-use "data/DG_elections_RIOreplication.dta", clear
+use "data/DG_elections.dta", clear
 
 label var nelda29_num_l1el "Previous Election Protests"
 label var nelda27_num_l1el "Previous Opp. Gain"
@@ -89,7 +89,9 @@ estout table1_m1 table1_m2 table1_m3 table1_m4 using "output/table1_EOMs.txt", c
 * FIGURE 2: COEFFICIENT PLOTS
 ********************************************************************************
 
-coefplot table1_m2, bylabel("Any EOM") || table1_m1, bylabel("Mixed Quality EOMs") || , drop(_cons wb_gdp_growth_l1 v2xel_frefair_l1el 2.region_num 3.region_num 5.region_num 6.region_num 7.region_num time) xline(0, lcolor(black) lpattern(dash)) mcolor(black) msymbol(circle_hollow) msize(small) ciopts(lcolor(black)) lcolor(black) scheme(sj) graphregion(color(white) lcolor(white)) plotregion(color(white) lcolor(black)) ylabel(, angle(horizontal)) xlabel(, nogrid)
+
+coefplot Any_EOM || Mixed_Quality_EOMs, drop(_cons  wb_gdp_growth_l1  v2xel_frefair_l1el 2.region_num 3.region_num 5.region_num 6.region_num 7.region_num time) rename (v2x_regime_autoc_l1yr = Autocracy  wb_oda_usd_k_l1yr_log = "ODA (log)" wb_gdp_pc_usd_k_l1yr_log = "GDP per capita (log)"  qual_both= "Mixed Quality EOMs" EOM_Presence="Any EOM ") xline(0) lcolor(black) graphregion(color(white)) scheme(s2mono) msize(small) 
+
 
 graph export "output/figure2_coefficients.png", as(png) replace
 
@@ -136,4 +138,15 @@ estout m1 m2 m3 using "output/table2_media.txt", order(qual_both eom_multiple v2
 
 set scheme sj
 
-histogram verdict_diff_S2S4 if election==1 & exec==1 & elecround==1, discrete by(eom_multiple, note("") graphregion(color(white))) color(gs12) lcolor(black) lwidth(thin) fintensity(100) xtitle("Verdict Difference (S2 - S4)") ytitle("Frequency") graphregion(color(white) lcolor(white)) plotregion(color(white) lcolor(black)) ylabel(, angle(horizontal) nogrid)
+* Relabel the panel values
+label define eomlab 0 "1 EOM" 1 "Multiple EOMs", replace
+label values eom_multiple eomlab
+
+* Black-and-white histogram
+histogram verdict_diff_S2S4 if election==1 & exec==1, discrete ///
+    by(eom_multiple, note("")) ///
+    fcolor(gs10) lcolor(black) ///
+    ylabel(, grid glcolor(gs14) glpattern(dash)) ///
+    xlabel(, grid glcolor(gs14) glpattern(dash)) ///
+    scheme(s1mono)
+
